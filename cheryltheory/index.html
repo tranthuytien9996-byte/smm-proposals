@@ -1,0 +1,616 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>A Proposal for @cheryltheory</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg:        #faf8f5;
+    --ink:       #1c1814;
+    --hero:      #7a5944;
+    --soft:      #f0e8de;
+    --highlight: #9e7a58;
+    --muted:     #8a7a70;
+    --rule:      #ddd4c8;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 17px;
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .container {
+    max-width: 780px;
+    margin: 0 auto;
+    padding: 0 28px;
+  }
+
+  /* ── HERO ─────────────────────────────────── */
+  .hero {
+    padding: 100px 0 80px;
+    text-align: center;
+    border-bottom: 1px solid var(--rule);
+  }
+  .hero-label {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 32px;
+  }
+  .hero-name {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: clamp(52px, 10vw, 88px);
+    font-weight: 400;
+    line-height: 1.05;
+    color: var(--ink);
+    margin-bottom: 28px;
+  }
+  .hero-name em {
+    font-style: italic;
+    color: var(--hero);
+  }
+  .hero-tagline {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-style: italic;
+    font-size: 20px;
+    color: var(--muted);
+    max-width: 520px;
+    margin: 0 auto 48px;
+    line-height: 1.6;
+  }
+  .hero-meta {
+    font-size: 13px;
+    color: var(--muted);
+    letter-spacing: 0.05em;
+  }
+
+  /* ── SECTION BASE ─────────────────────────── */
+  .section {
+    padding: 80px 0;
+    border-bottom: 1px solid var(--rule);
+  }
+  .section:last-child { border-bottom: none; }
+
+  .section-num {
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--highlight);
+    margin-bottom: 12px;
+  }
+  .section-title {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: clamp(28px, 5vw, 40px);
+    font-weight: 400;
+    line-height: 1.2;
+    margin-bottom: 40px;
+    color: var(--ink);
+  }
+  .section-title em { font-style: italic; color: var(--hero); }
+
+  p { margin-bottom: 20px; }
+  p:last-child { margin-bottom: 0; }
+
+  .lead {
+    font-size: 19px;
+    line-height: 1.65;
+    color: var(--ink);
+  }
+
+  /* ── PULLQUOTE ────────────────────────────── */
+  .pullquote {
+    border-left: 2px solid var(--hero);
+    padding: 4px 0 4px 28px;
+    margin: 36px 0;
+    font-family: 'Playfair Display', Georgia, serif;
+    font-style: italic;
+    font-size: 18px;
+    line-height: 1.6;
+    color: var(--hero);
+  }
+  .pullquote cite {
+    display: block;
+    font-family: 'DM Sans', sans-serif;
+    font-style: normal;
+    font-size: 12px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-top: 10px;
+  }
+
+  /* ── OBSERVATION CARDS ───────────────────── */
+  .obs-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 28px;
+  }
+  .obs-card {
+    background: var(--soft);
+    border-radius: 4px;
+    padding: 36px 40px;
+  }
+  .obs-num {
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--highlight);
+    margin-bottom: 12px;
+  }
+  .obs-heading {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 22px;
+    font-weight: 600;
+    line-height: 1.3;
+    margin-bottom: 16px;
+    color: var(--ink);
+  }
+  .obs-body { font-size: 16px; color: #4a3c30; line-height: 1.7; }
+  .obs-evidence {
+    margin-top: 18px;
+    padding-top: 18px;
+    border-top: 1px solid var(--rule);
+    font-size: 13px;
+    color: var(--muted);
+    font-weight: 500;
+  }
+
+  /* ── SERVICE CARDS ───────────────────────── */
+  .service-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+  }
+  @media (max-width: 580px) { .service-grid { grid-template-columns: 1fr; } }
+
+  .service-card {
+    border: 1px solid var(--rule);
+    border-radius: 4px;
+    padding: 32px 28px;
+    background: #fff;
+  }
+  .service-title {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 19px;
+    font-weight: 600;
+    margin-bottom: 16px;
+    color: var(--ink);
+  }
+  .service-list {
+    list-style: none;
+    padding: 0;
+    font-size: 15px;
+    color: #5a4a3c;
+    line-height: 1.7;
+  }
+  .service-list li {
+    padding-left: 16px;
+    position: relative;
+    margin-bottom: 8px;
+  }
+  .service-list li::before {
+    content: '-';
+    position: absolute;
+    left: 0;
+    color: var(--highlight);
+  }
+  .service-price {
+    margin-top: 20px;
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--highlight);
+  }
+
+  /* ── SAMPLE CONTENT ──────────────────────── */
+  .sample-wrap {
+    background: var(--ink);
+    border-radius: 4px;
+    padding: 48px 52px;
+    margin: 40px 0 32px;
+  }
+  .sample-label {
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--highlight);
+    margin-bottom: 28px;
+  }
+  .sample-slides {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+  }
+  .slide {
+    border-bottom: 1px solid #3a2e24;
+    padding-bottom: 24px;
+  }
+  .slide:last-child { border-bottom: none; padding-bottom: 0; }
+  .slide-num {
+    font-size: 11px;
+    color: var(--highlight);
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+  }
+  .slide-copy {
+    color: #e8e0d8;
+    font-size: 16px;
+    line-height: 1.75;
+    white-space: pre-line;
+  }
+  .slide-copy strong {
+    color: #fff;
+    font-weight: 500;
+  }
+
+  .sample-note {
+    font-size: 14px;
+    color: var(--muted);
+    line-height: 1.7;
+    font-style: italic;
+    padding: 20px 0;
+    border-top: 1px solid var(--rule);
+  }
+
+  /* ── WHY DIFFERENT ───────────────────────── */
+  .why-list {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+  .why-list li {
+    padding-left: 24px;
+    position: relative;
+    font-size: 17px;
+    line-height: 1.65;
+  }
+  .why-list li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 12px;
+    width: 8px;
+    height: 1px;
+    background: var(--hero);
+  }
+
+  /* ── CTA ─────────────────────────────────── */
+  .cta-section {
+    text-align: center;
+    padding: 80px 0;
+  }
+  .cta-title {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: clamp(28px, 5vw, 40px);
+    font-weight: 400;
+    margin-bottom: 20px;
+    color: var(--ink);
+  }
+  .cta-sub {
+    color: var(--muted);
+    font-size: 16px;
+    margin-bottom: 44px;
+    max-width: 460px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .cta-btn {
+    display: inline-block;
+    background: var(--hero);
+    color: #fff;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 16px 48px;
+    border-radius: 2px;
+    transition: background 0.2s;
+  }
+  .cta-btn:hover { background: var(--highlight); }
+
+  /* ── FEED IMAGE ──────────────────────────── */
+  .feed-img {
+    width: 100%;
+    max-height: 380px;
+    object-fit: cover;
+    border-radius: 4px;
+    margin-bottom: 40px;
+    display: block;
+    filter: saturate(0.85);
+  }
+
+  /* ── FOOTER ──────────────────────────────── */
+  footer {
+    padding: 48px 0;
+    border-top: 1px solid var(--rule);
+    text-align: center;
+    font-size: 13px;
+    color: var(--muted);
+    line-height: 2;
+  }
+  footer strong { color: var(--ink); }
+</style>
+</head>
+<body>
+
+<!-- ══════════════════════════════════════════ -->
+<!--  HERO                                       -->
+<!-- ══════════════════════════════════════════ -->
+<div class="container">
+  <div class="hero">
+    <p class="hero-label">A proposal prepared for</p>
+    <h1 class="hero-name">@cheryl<em>theory</em></h1>
+    <p class="hero-tagline">For the podcast producer who has already built the body of work - and is ready for the world to finally see it clearly.</p>
+    <p class="hero-meta">Prepared by @tracey.contentworks &nbsp;&middot;&nbsp; April 18, 2026</p>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════ -->
+<!--  01 / I SEE YOU                             -->
+<!-- ══════════════════════════════════════════ -->
+<div class="container">
+  <section class="section">
+    <p class="section-num">01 / 06</p>
+    <h2 class="section-title">I stayed up reading<br>your content.</h2>
+
+    <img src="aesthetic/top2.jpg" alt="Cheryl" class="feed-img">
+
+    <p class="lead">You've been building this for seven years. Not casually - deliberately. You burned an earlier version of the business down and rebuilt it from scratch. You've rebranded your podcast three times, each time returning to the same question that won't leave you alone:</p>
+
+    <div class="pullquote">
+      "What is this show uniquely positioned to do that most podcasts aren't?"
+      <cite>- @cheryltheory, March 2026</cite>
+    </div>
+
+    <p>That question isn't restlessness. That's intellectual rigor. You have eight peer-reviewed publications. You left a PhD because academia was too slow, too insulated from the world you actually want to shape. Now you're doing the same work - interrogating ideas, stress-testing frameworks - but through a microphone instead of a journal.</p>
+
+    <p>And you're doing it alone. Editing every episode yourself. Running SIGNATURE workshops, producing corporate rounds for IMH and the Singapore Sleep Society, moderating panels at FLAsia and AIFA, hosting Thrive and Vibe SG, organizing Pen and Paper Time meetups at bars in central Singapore.</p>
+
+    <p>Here's what I noticed: you use the phrase "body of work" constantly. Not "content." Not "posts." Body of work. That's not a content strategy term. That's what a researcher says when they mean something that will outlast the moment it was made in.</p>
+
+    <p>You're not trying to go viral. You're trying to build something that compounds. You said it yourself:</p>
+
+    <div class="pullquote">
+      "Slow, deliberate work compounds."
+      <cite>- @cheryltheory</cite>
+    </div>
+
+    <p>The challenge is: your Instagram isn't compounding the way the rest of your work is. And I think I know why.</p>
+  </section>
+</div>
+
+<!-- ══════════════════════════════════════════ -->
+<!--  02 / 3 OBSERVATIONS                        -->
+<!-- ══════════════════════════════════════════ -->
+<div class="container">
+  <section class="section">
+    <p class="section-num">02 / 06</p>
+    <h2 class="section-title">Three things I<br>observed in the audit.</h2>
+
+    <div class="obs-grid">
+
+      <div class="obs-card">
+        <p class="obs-num">Observation 01</p>
+        <h3 class="obs-heading">Your personal content gets 3-4x the engagement of your educational content - but it's only 20% of your feed.</h3>
+        <p class="obs-body">Your top-performing original posts are personal: the LDR-to-marriage milestone, the business 5th birthday, the Vancouver photo dump. They pull 60-130+ likes. Your podcast education carousels - which make up around 30% of your feed - average closer to 15-25 likes. This is not a coincidence and it's not a problem with the education content itself. It's a blend issue. The posts that perform best are the ones where you - the researcher-turned-producer who burned a business down and rebuilt it - show up in the content. The show concept content works best when Cheryl is in the story, not just the thesis.</p>
+        <p class="obs-evidence">Data: avg likes on personal posts ~75 vs avg likes on pure educational carousel ~22. Top organic original post: LDR milestone at 267 likes.</p>
+      </div>
+
+      <div class="obs-card">
+        <p class="obs-num">Observation 02</p>
+        <h3 class="obs-heading">You're producing award-winning audio every week and not turning any of it into Reels.</h3>
+        <p class="obs-body">You have a 2x Asia Podcast Awards winning show - EDIT HISTORY - and you're now rebranding it to feature academics and researchers stress-testing their own theses. That is genuinely differentiated content. But your Reels average only 497 views, and you've posted just 16 of them across 100 posts. Meanwhile, a 60-second clip of a guest answering "where is your thesis under pressure today?" could reach audiences who have never heard of your show. The raw material is already being created. It's just not being activated on the platform where discovery happens.</p>
+        <p class="obs-evidence">Data: 71% carousels, 16% Reels. Reel avg views: 497 vs industry benchmark of 2,000-5,000+ for a niche creator. Podcast content not being cross-posted.</p>
+      </div>
+
+      <div class="obs-card">
+        <p class="obs-num">Observation 03</p>
+        <h3 class="obs-heading">Your highest-value revenue stream is nearly invisible on your Instagram.</h3>
+        <p class="obs-body">You produced a corporate roundtable for the Institute of Mental Health. You hosted podcast recording sessions for the Singapore Sleep Society with six medical experts. You moderated at AIFA 2026. These are not side projects - they're the core of a corporate production arm that commands premium pricing. But scroll your Instagram and you'd think you're primarily a podcast coach for individual creators. The brands that need you most - marketing directors at Singapore SMEs, comms teams at associations - aren't finding you here because the work you're doing for them isn't being told as a story.</p>
+        <p class="obs-evidence">Ref: https://www.instagram.com/p/DJZX4JCyJDY/ (IMH post: high-quality storytelling, 70 likes - one of your stronger performing professional posts.)</p>
+      </div>
+
+    </div>
+  </section>
+</div>
+
+<!-- ══════════════════════════════════════════ -->
+<!--  03 / SERVICES                              -->
+<!-- ══════════════════════════════════════════ -->
+<div class="container">
+  <section class="section">
+    <p class="section-num">03 / 06</p>
+    <h2 class="section-title">What I can<br>do with you.</h2>
+
+    <!-- STUDENT: thay gia cu the vao placeholder [Investment: on request] -->
+    <div class="service-grid">
+
+      <!-- STUDENT: Cheryl da co website cheryllau.com nen khong offer landing page nua.
+           Card nay thay bang Conversion & DM Funnel - phu hop voi van de thuc su cua co:
+           moi thu hien dang chay qua manual DM, khong co automation nao ca. -->
+      <div class="service-card">
+        <h3 class="service-title">Conversion & DM Funnel</h3>
+        <ul class="service-list">
+          <li>ManyChat automation: when someone DMs "SIGNATURE" or "CRAFTED", they instantly get the right information - no more waiting on manual replies</li>
+          <li>Link-in-bio audit and restructure so each of your three offers (SIGNATURE, CRAFTED, corporate production) has a clear entry point</li>
+          <li>Content-to-conversion mapping: which posts should drive which CTA, and how to close the gap between someone reading your content and actually booking a call</li>
+        </ul>
+        <p class="service-price">Investment: on request</p>
+      </div>
+
+      <div class="service-card">
+        <h3 class="service-title">Content Strategy</h3>
+        <ul class="service-list">
+          <li>Audit and recalibrate the content blend: more Cheryl in the educational posts</li>
+          <li>Monthly content calendar across your pillars</li>
+          <li>A Reels strategy built around EDIT HISTORY clips</li>
+          <li>Hashtag system for organic discovery</li>
+        </ul>
+        <p class="service-price">Investment: on request</p>
+      </div>
+
+      <div class="service-card">
+        <h3 class="service-title">Content Execution - Carousel + Posts</h3>
+        <ul class="service-list">
+          <li>4-8 carousels per month, written in your voice</li>
+          <li>Each post goes through a voice-check before delivery</li>
+          <li>Includes: hook, body, CTA - structured for your audience</li>
+          <li>Designed slides if needed</li>
+        </ul>
+        <p class="service-price">Investment: on request</p>
+      </div>
+
+      <div class="service-card">
+        <h3 class="service-title">Content Execution - Reels + Stories</h3>
+        <ul class="service-list">
+          <li>Weekly Reels scripted around EDIT HISTORY episode moments</li>
+          <li>Story frames: event promos, SIGNATURE announcements, community moments</li>
+          <li>Short-form scripts that feel like you, not like a social media manager</li>
+        </ul>
+        <p class="service-price">Investment: on request</p>
+      </div>
+
+    </div>
+  </section>
+</div>
+
+<!-- ══════════════════════════════════════════ -->
+<!--  04 / SAMPLE CONTENT                        -->
+<!-- ══════════════════════════════════════════ -->
+<div class="container">
+  <section class="section">
+    <p class="section-num">04 / 06</p>
+    <h2 class="section-title">I wrote a sample<br>for you.</h2>
+
+    <p>Before writing this, I read through 20+ of your captions in full - not to copy the topics, but to understand the rhythm. How you open. Which words you reach for. Where you put the turn. The goal was to write something that sounds like you sat down and wrote it - not like someone wrote "for" you.</p>
+
+    <p>Format: 5-slide carousel. Topic: a fresh angle on the concept-vs-content distinction you've been building your positioning around - but from an angle you haven't taken yet.</p>
+
+    <div class="sample-wrap">
+      <p class="sample-label">Sample Carousel - "The real reason your podcast isn't growing"</p>
+
+      <div class="sample-slides">
+
+        <div class="slide">
+          <p class="slide-num">Slide 01</p>
+          <p class="slide-copy">Most podcasters think they're not growing because their content isn't good enough.
+
+It's not that.</p>
+        </div>
+
+        <div class="slide">
+          <p class="slide-num">Slide 02</p>
+          <p class="slide-copy">After years of working with podcasters - and building my own show from scratch - here's what I've actually observed:
+
+The shows that struggle aren't struggling because of quality.
+
+They're struggling because of concept.</p>
+        </div>
+
+        <div class="slide">
+          <p class="slide-num">Slide 03</p>
+          <p class="slide-copy">Quality content gets you to episode 30.
+
+A differentiated show concept gets you to episode 300.
+
+Here's the difference:
+
+Quality = you can produce good episodes.
+
+Concept = there's a clear reason why someone would choose YOUR show over the 50 others in your niche.</p>
+        </div>
+
+        <div class="slide">
+          <p class="slide-num">Slide 04</p>
+          <p class="slide-copy">When I sit down with a new client, I don't start with content calendars.
+
+I start with one question:
+
+What is this show uniquely positioned to do that most podcasts in this space aren't doing?
+
+When you can answer that with clarity... everything else - your topics, your guests, your marketing - starts to make sense.
+
+That's the leverage.</p>
+        </div>
+
+        <div class="slide">
+          <p class="slide-num">Slide 05</p>
+          <p class="slide-copy">You're not behind because you haven't posted enough.
+
+You're behind because you haven't built the foundation yet.
+
+And foundations take time. That's intentional.
+
+Sounds good? Awesome. Let's get to work. 🎙️</p>
+        </div>
+
+      </div>
+    </div>
+
+    <p class="sample-note">I wrote this sample after reading 20+ of your captions in full. I deliberately mirrored how you write - the sentence rhythm, the opening move (bold declarative that challenges conventional wisdom), the turn in the middle, the "here's the difference" structure, your closing line. If we work together, every piece of content would go through this same process before it reaches you. You'd never get something that sounds like a social media manager wrote it.</p>
+
+  </section>
+</div>
+
+<!-- ══════════════════════════════════════════ -->
+<!--  05 / WHY DIFFERENT                         -->
+<!-- ══════════════════════════════════════════ -->
+<div class="container">
+  <section class="section">
+    <p class="section-num">05 / 06</p>
+    <h2 class="section-title">Why this is<br>not a template pitch.</h2>
+
+    <ul class="why-list">
+      <li>I read your content before I wrote a single word of this. Everything in this proposal - the observations, the sample, the language - comes from your account, not from a general "podcaster ICP" brief.</li>
+      <li>I know you use "body of work" the way others use "content." I know your sign-off. I know you left a PhD, that you've rebuilt the business, and that EDIT HISTORY's new direction toward researchers and academics isn't just a rebrand - it's you coming home to who you actually are.</li>
+      <li>I don't pitch "more posting" or "better hashtags" as the strategy. The work you're doing deserves content that matches it - deliberate, differentiated, and built for the long game.</li>
+      <li>The sample above was written to pass one test: if you didn't know I wrote it, would you recognize it as yours? That's the only standard that matters.</li>
+    </ul>
+  </section>
+</div>
+
+<!-- ══════════════════════════════════════════ -->
+<!--  06 / CTA                                   -->
+<!-- ══════════════════════════════════════════ -->
+<div class="container">
+  <div class="cta-section">
+    <p class="section-num" style="text-align:center; margin-bottom: 16px;">06 / 06</p>
+    <h2 class="cta-title">If this resonates,<br>come say hi.</h2>
+    <p class="cta-sub">No pressure, no pitch deck. Just a DM if something here landed - and we can go from there.</p>
+    <a href="https://www.instagram.com/tracey.contentworks/" class="cta-btn">DM me on Instagram</a>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════ -->
+<!--  FOOTER                                     -->
+<!-- ══════════════════════════════════════════ -->
+<div class="container">
+  <footer>
+    <strong>@tracey.contentworks</strong><br>
+    April 18, 2026<br><br>
+    <span style="font-size: 12px;">This proposal was written specifically for @cheryltheory. Not a template.</span>
+  </footer>
+</div>
+
+</body>
+</html>
